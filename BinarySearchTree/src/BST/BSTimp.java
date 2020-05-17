@@ -131,5 +131,7 @@ public class BSTimp {
 		bst1.insert(13);
 		bst1.insert(9);
 		bst1.successor(15);
+		bst1.treeMin();
+		bst1.searchNode(20);
 	}
 }
