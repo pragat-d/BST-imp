@@ -116,22 +116,61 @@ public class BSTimp {
 		}
 		return y;
 	}
+	
+	public void delete(int num) {
+		 Node node = deleteRec(root,num);
+		 //System.out.println(node.val);
+	}
+	
+	private Node deleteRec(Node deleteNode , int num) {
+		Node searchNode = searchNodeRec(root,num);
+		Node y ;
+		Node x;
+		if(searchNode.left == null || searchNode.right == null) {
+			y = searchNode;
+		}else {
+			y = successorRec(searchNode, num);
+		}
+		if(y.left != null)
+			x = y.left;
+		else
+			x = y.right;
+		if(x != null) {
+			Node parentOfx = parentRec(root, x.val, root);
+			Node parentOfy = parentRec(root, y.val, root);
+			parentOfx = parentOfy;
+		}
+		Node parentOfy = parentRec(root, y.val, root);
+		if(parentRec(root, y.val, root) == null) {
+			root = x;
+		}else if(parentOfy.left == y)
+			parentOfy.left =x;
+		else
+			parentOfy.right = x;
+		
+		if(y != searchNode) {
+			searchNode.val =y.val;
+		}
+		return y;
+	}
 
 	public static void main(String args[]) {
 		BSTimp bst1 = new BSTimp();
 		bst1.insert(15);
-		bst1.insert(6);
-		bst1.insert(18);
+		bst1.insert(5);
+		bst1.insert(16);
 		bst1.insert(3);
-		bst1.insert(7);
-		bst1.insert(17);
+		bst1.insert(12);
 		bst1.insert(20);
-		bst1.insert(2);
-		bst1.insert(4);
+		bst1.insert(10);
 		bst1.insert(13);
-		bst1.insert(9);
-		bst1.successor(15);
+		bst1.insert(18);
+		bst1.insert(23);
+		bst1.insert(6);
+		bst1.insert(7);
+		bst1.delete(5);
+		bst1.print();
 		bst1.treeMin();
-		bst1.searchNode(20);
+		bst1.successor(12);
 	}
 }
